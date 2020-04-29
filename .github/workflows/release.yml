@@ -22,7 +22,7 @@ jobs:
       - name: 'Create Release Notes'
         id: create-release-notes
         run: |
-          echo "::set-output name=release-notes::$(./scripts/create-release-notes.sh)"
+          echo "::set-output name=release-notes::$(./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} ${{ github.ref }})"
 
       - name: 'Create Release'
         uses: actions/create-release@v1
