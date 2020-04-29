@@ -19,8 +19,8 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v2
 
-      - name: 'Fetch Tags'
-        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      - name: 'Fetch History'
+        run: git fetch --prune --unshallow
 
       - name: 'Create Release Notes'
         id: create-release-notes
