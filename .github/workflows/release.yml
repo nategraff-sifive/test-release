@@ -13,8 +13,7 @@ env:
 
 jobs:
   release:
-    runs-on:
-      description: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 'Checkout'
@@ -24,7 +23,8 @@ jobs:
         id: release-notes
         run: ./create-release-notes.sh
         outputs:
-          release-notes: 'Release notes'
+          release-notes:
+            description: 'Release notes'
 
       - name: 'Create Release'
         uses: actions/create-release@v1
