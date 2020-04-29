@@ -47,5 +47,4 @@ jobs:
       - name: 'Tag Submodules for Release'
         run: |
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
-          git -C test-release-submodule tag ${tag}
-          git -C test-release-submodule push --tags
+          ./scripts/tag-submodules.sh ${tag}
