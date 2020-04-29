@@ -26,7 +26,10 @@ jobs:
         id: create-release-notes
         run: |
           ./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} $(echo ${{ github.ref }} | cut -d '/' -f 3) > release_notes.txt
-          cat release_notes.txt
+          release_notes=$(cat release_notes.txt)
+          release_notes="${release_notes//'%'/'%25'}"
+          release_notes="${release_notes//$'\n'/'%0A'}"
+          release_notes="${release_notes//$'\r'/'%0D'}"
           echo "::set-output name=release-notes::$(cat release_notes.txt)"
 
       - name: 'Create Release'
