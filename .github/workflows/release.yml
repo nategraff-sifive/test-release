@@ -28,7 +28,7 @@ jobs:
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           release_notes=$(./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} ${tag})
           release_notes="${release_notes//$'\n'/'%0A'}"
-          echo "::set-output name=release-notes::${release_notes})"
+          echo "::set-output name=release-notes::${release_notes}"
 
       - name: 'Create Release'
         uses: actions/create-release@v1
