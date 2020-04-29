@@ -25,8 +25,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: ${{ PROJECT_NAME }} ${{ github.ref }}
+          release_name: ${{ env.PROJECT_NAME }} ${{ github.ref }}
           body: |
-            \# Release notes for ${{ PROJECT_NAME }} ${{ github.ref }}
+            \# Release notes for ${{ env.PROJECT_NAME }} ${{ github.ref }}
           draft: false
-          prerelease: ${{ PRERELEASE }} 
+          prerelease: ${{ env.PRERELEASE }} 
