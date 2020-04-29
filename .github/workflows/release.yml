@@ -20,11 +20,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 'Create Release Notes'
-        id: release-notes
-        run: ./create-release-notes.sh
-        outputs:
-          release-notes:
-            description: 'Release notes'
+        id: create-release-notes
+        run: |
+          echo "::set-output name=release-notes::$(./create-release-notes.sh)"
 
       - name: 'Create Release'
         uses: actions/create-release@v1
@@ -33,6 +31,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ env.PROJECT_NAME }} ${{ github.ref }}
-          body: ${{ steps.release-notes.output.release-notes }}
+          body: ${{ steps.create-release-notes.outputs.release-notes }}
           draft: false
           prerelease: ${{ env.PRERELEASE }} 
