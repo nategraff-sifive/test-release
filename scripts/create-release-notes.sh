@@ -10,7 +10,7 @@ fi
 project=$1; shift 1;
 current_release=$1; shift 1;
 
-last_release=$(git describe --tags HEAD~)
+last_release=$(git describe --tags --always HEAD~)
 
 echo "# Release notes for ${project} ${current_release}"
 
