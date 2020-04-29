@@ -25,12 +25,8 @@ jobs:
       - name: 'Create Release Notes'
         id: create-release-notes
         run: |
-          ./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} $(echo ${{ github.ref }} | cut -d '/' -f 3) > release_notes.txt
-          release_notes=$(cat release_notes.txt)
-          release_notes="${release_notes//'%'/'%25'}"
-          release_notes="${release_notes//$'\n'/'%0A'}"
-          release_notes="${release_notes//$'\r'/'%0D'}"
-          echo "::set-output name=release-notes::$(cat release_notes.txt)"
+          tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
+          echo "::set-output name=release_notes::$(./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} ${tag})"
 
       - name: 'Create Release'
         uses: actions/create-release@v1
