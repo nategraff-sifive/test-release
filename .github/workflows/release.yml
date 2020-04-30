@@ -70,6 +70,7 @@ jobs:
 
       - name: 'Publish Documentation'
         run: |
+          tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           cd doc/html
           git config user.email "no-reply@sifive.com"
           git config user.name "actions-bot"
