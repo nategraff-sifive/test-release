@@ -48,3 +48,23 @@ jobs:
         run: |
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           ./scripts/tag-submodules.sh ${tag}
+
+      - name: 'Clean Documentation Output Folder'
+        run: |
+          cd doc/html
+          rm -rf *
+
+      - name: 'Build Sphinx Documenattion'
+        run: |
+          docker run \
+            --rm \
+            -v /path/to/document:/docs \
+            sphinxdoc/sphinx \
+            make html
+
+      - name: 'Publish Documentation'
+        run: |
+          cd doc/html
+          git add .
+          git commit -m "Documentation for ${tag}"
+          git push
