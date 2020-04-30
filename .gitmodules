@@ -1,3 +1,6 @@
 [submodule "test-release-submodule"]
 	path = test-release-submodule
 	url = https://github.com/nategraff-sifive/test-release-submodule.git
+[submodule "doc/html"]
+	path = doc/html
+	url = https://github.com/nategraff-sifive/test-release-doc.git
