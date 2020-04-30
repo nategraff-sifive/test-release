@@ -60,9 +60,11 @@ jobs:
 
       - name: 'Build Sphinx Documenattion'
         run: |
+          tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           docker run \
             --rm \
             -v $(pwd)/doc:/docs \
+            -e RELEASE_TAG="${tag}"
             sphinxdoc/sphinx \
             make html
 
