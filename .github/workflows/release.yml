@@ -49,14 +49,20 @@ jobs:
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           ./scripts/tag-submodules.sh ${tag}
 
-      - name: 'Clean Documentation Output Folder'
+      - name: 'Create Release'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ env.PROJECT_NAME }} ${{ github.ref }}
+          body: ${{ steps.create-release-notes.outputs.release-notes }}
+          draft: false
+          prerelease: ${{ env.PRERELEASE }}
+
+      - name: 'Build Docker Image for Docs Build'
         run: |
-          cd doc/html
-          git fetch
-          git checkout master
-          git reset --hard origin/master
-          rm -rf *
-          rm .buildinfo
+          docker build -t docs-build -f doc/Dockerfile .
 
       - name: 'Build Sphinx Documenattion'
         run: |
@@ -65,8 +71,8 @@ jobs:
             --rm \
             -v $(pwd)/doc:/docs \
             -e RELEASE_TAG="${tag}" \
-            sphinxdoc/sphinx \
-            make html
+            docs-build \
+            make clean html
 
       - name: 'Publish Documentation'
         run: |
@@ -75,5 +81,5 @@ jobs:
           git config user.email "no-reply@sifive.com"
           git config user.name "actions-bot"
           git add .
-          git commit -m "Documentation for ${tag}"
+          git commit -m "Documentation for ${{ env.PROJECT_NAME }} ${tag}"
           git push

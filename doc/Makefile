@@ -19,5 +19,11 @@ help:
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
+.PHONY: xml
+xml:
+
+xml/index.xml: ../include/*.h
+	cd .. && doxygen
+
 clean:
 	-rm -rf doctrees html
