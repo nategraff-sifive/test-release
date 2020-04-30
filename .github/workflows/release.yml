@@ -64,7 +64,7 @@ jobs:
           docker run \
             --rm \
             -v $(pwd)/doc:/docs \
-            -e RELEASE_TAG="${tag}"
+            -e RELEASE_TAG="${tag}" \
             sphinxdoc/sphinx \
             make html
 
