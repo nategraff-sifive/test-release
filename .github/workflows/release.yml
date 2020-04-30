@@ -58,7 +58,7 @@ jobs:
         run: |
           docker run \
             --rm \
-            -v /path/to/document:/docs \
+            -v doc:/docs \
             sphinxdoc/sphinx \
             make html
 
