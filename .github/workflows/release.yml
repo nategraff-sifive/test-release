@@ -51,8 +51,12 @@ jobs:
 
       - name: 'Clean Documentation Output Folder'
         run: |
-          rm -rf doc/html/*
-          rm doc/html/.buildinfo
+          cd doc/html
+          git fetch
+          git checkout master
+          git reset --hard origin/master
+          rm -rf *
+          rm .buildinfo
 
       - name: 'Build Sphinx Documenattion'
         run: |
@@ -65,6 +69,8 @@ jobs:
       - name: 'Publish Documentation'
         run: |
           cd doc/html
+          git config user.email "no-reply@sifive.com"
+          git config user.name "actions-bot"
           git add .
           git commit -m "Documentation for ${tag}"
           git push
