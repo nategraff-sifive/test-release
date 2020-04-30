@@ -51,14 +51,14 @@ jobs:
 
       - name: 'Clean Documentation Output Folder'
         run: |
-          cd doc/html
-          rm -rf *
+          rm -rf doc/html/*
+          rm doc/html/.buildinfo
 
       - name: 'Build Sphinx Documenattion'
         run: |
           docker run \
             --rm \
-            -v doc:/docs \
+            -v $(pwd)/doc:/docs \
             sphinxdoc/sphinx \
             make html
 
