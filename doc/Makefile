@@ -17,7 +17,7 @@ help:
 .PHONY: xml
 xml: xml/index.xml
 
-xml/index.xml: ../include/*.h
+xml/index.xml: ../include/test.h
 	cd .. && doxygen
 
 # Catch-all target: route all unknown targets to Sphinx using the new
@@ -26,4 +26,4 @@ xml/index.xml: ../include/*.h
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 clean:
-	-rm -rf doctrees html xml
+	-rm -rf doctrees html/* xml
