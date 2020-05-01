@@ -61,7 +61,7 @@ jobs:
             -v $(pwd)/doc:/docs \
             -e RELEASE_TAG="${tag}" \
             docs-build \
-            make clean html
+            make clean xml html
 
       - name: 'Publish Documentation'
         run: |
