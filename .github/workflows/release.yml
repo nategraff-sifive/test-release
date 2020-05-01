@@ -53,6 +53,13 @@ jobs:
         run: |
           docker build -t docs-build -f doc/Dockerfile .
 
+      - name: 'Clean Docs Output Folder'
+        run: |
+          cd doc/html
+          git fetch
+          git checkout master
+          git reset --hard origin/master
+
       - name: 'Build Sphinx Documenattion'
         run: |
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
