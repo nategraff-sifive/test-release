@@ -14,16 +14,16 @@ help:
 
 .PHONY: help Makefile
 
+.PHONY: xml
+xml: xml/index.xml
+
+xml/index.xml: ../include/*.h
+	cd .. && doxygen
+
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: xml
-xml:
-
-xml/index.xml: ../include/*.h
-	cd .. && doxygen
-
 clean:
-	-rm -rf doctrees html
+	-rm -rf doctrees html xml
