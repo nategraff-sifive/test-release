@@ -49,17 +49,6 @@ jobs:
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           ./scripts/tag-submodules.sh ${tag}
 
-      - name: 'Create Release'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ env.PROJECT_NAME }} ${{ github.ref }}
-          body: ${{ steps.create-release-notes.outputs.release-notes }}
-          draft: false
-          prerelease: ${{ env.PRERELEASE }}
-
       - name: 'Build Docker Image for Docs Build'
         run: |
           docker build -t docs-build -f doc/Dockerfile .
