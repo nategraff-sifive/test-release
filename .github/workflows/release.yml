@@ -58,10 +58,10 @@ jobs:
           tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
           docker run \
             --rm \
-            -v $(pwd)/doc:/docs \
+            -v $(pwd):/docs \
             -e RELEASE_TAG="${tag}" \
             docs-build \
-            make clean xml html
+            make -C doc clean xml html
 
       - name: 'Publish Documentation'
         run: |
