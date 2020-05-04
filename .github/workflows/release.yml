@@ -26,7 +26,7 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: 'Create Release Notes'
-        uses: sifive/action-release-notes@e4fe812
+        uses: sifive/action-release-notes@ed831e7
         id: create-release-notes
         with:
           release: ${{ github.ref }}
