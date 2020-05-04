@@ -26,12 +26,10 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: 'Create Release Notes'
+        uses: sifive/action-release-notes
         id: create-release-notes
-        run: |
-          tag=$(echo ${{ github.ref }} | cut -d '/' -f 3)
-          release_notes=$(./scripts/create-release-notes.sh ${{ env.PROJECT_NAME }} ${tag})
-          release_notes="${release_notes//$'\n'/'%0A'}"
-          echo "::set-output name=release-notes::${release_notes}"
+        with:
+          release: ${{ github.ref }}
 
       - name: 'Create Release'
         uses: actions/create-release@v1
