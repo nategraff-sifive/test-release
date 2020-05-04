@@ -29,6 +29,7 @@ jobs:
         uses: sifive/action-release-notes@9b31f00
         id: create-release-notes
         with:
+          project-name: ${{ env.PROJECT_NAME }}
           release: ${{ github.ref }}
 
       - name: 'Create Release'
